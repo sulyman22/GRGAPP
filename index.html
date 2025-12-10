@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجموعة غياث البحثية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #008080; /* Teal */
+            --secondary-color: #003f5c; /* Midnight Blue */
+            --accent-color: #4CAF50;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --light-color: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* شاشة البدء */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .splash-logo {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .splash-logo i {
+            font-size: 80px;
+            color: var(--primary-color);
+        }
+
+        .splash-title {
+            font-family: 'Scheherazade New', serif;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .splash-subtitle {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 300;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            font-family: 'Amiri', serif;
+        }
+
+        .splash-graphics {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .graphic-icon {
+            font-size: 2.5rem;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .graphic-icon:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: white;
+            animation: loading 3s ease forwards;
+        }
+
+        @keyframes loading {
+            to { width: 100%; }
+        }
+
+        /* الصفحة الرئيسية */
+        .page {
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .group-name {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .search-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 2px solid #e0e0e0;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.2);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .offices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .office-circle {
+            background-color: var(--light-color);
+            border-radius: 50%;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .office-circle:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .office-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--primary-color);
+        }
+
+        .office-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .office-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        .office-number {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        /* صفحة تفاصيل المكتب */
+        .office-details {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            position: relative;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 25px;
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .office-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .office-title {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .print-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .office-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #555;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .member-card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image {
+            height: 220px;
+            width: 100%;
+            background-color: var(--primary-color);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-icon {
+            color: var(--primary-color);
+        }
+
+        .tasks-list {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tasks-list ul {
+            list-style-type: none;
+            padding-right: 20px;
+        }
+
+        .tasks-list li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .tasks-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* تنسيق الطباعة */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .office-details, .office-details * {
+                visibility: visible;
+            }
+            
+            .office-details {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .back-button, .print-button, .contact-info {
+                display: none !important;
+            }
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 992px) {
+            .offices-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .office-circle {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .splash-title {
+                font-size: 3rem;
+            }
+            
+            .splash-subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            .offices-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .office-circle {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .office-name {
+                font-size: 1.2rem;
+            }
+            
+            .office-icon {
+                font-size: 2.5rem;
+            }
+            
+            .splash-title {
+                font-size: 2.5rem;
+            }
+            
+            .splash-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .splash-graphics {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .office-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .offices-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .office-circle {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .splash-title {
+                font-size: 2rem;
+                text-align: center;
+            }
+            
+            .splash-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .graphic-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة البدء -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <i class="fas fa-flask"></i>
+        </div>
+        <h1 class="splash-title">غياث</h1>
+        <h2 class="splash-subtitle">GRG</h2>
+        
+        <div class="splash-graphics">
+            <div class="graphic-icon">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <div class="graphic-icon">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <div class="graphic-icon">
+                <i class="fas fa-tooth"></i>
+            </div>
+            <div class="graphic-icon">
+                <i class="fas fa-pills"></i>
+            </div>
+        </div>
+        
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page hidden">
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h1 class="group-name">مجموعة غياث البحثية</h1>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="ابحث عن مكتب بالإسم..." id="search-input">
+            </div>
+        </header>
+        
+        <main>
+            <h2 style="text-align: center; color: var(--secondary-color); margin-bottom: 20px; font-size: 1.8rem;">مكاتب المجموعة البحثية</h2>
+            <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 30px;">تتكون مجموعة غياث البحثية من ستة مكاتب متخصصة تعمل معًا لتحقيق رسالة المجموعة في دعم البحث العلمي والابتكار والتطوير في المجالات الطبية والصحية</p>
+            
+            <div class="offices-grid" id="offices-container">
+                <!-- سيتم تعبئة الدوائر ديناميكيًا -->
+            </div>
+        </main>
+    </div>
+
+    <!-- صفحة تفاصيل المكتب -->
+    <div id="office-details-page" class="page hidden">
+        <div class="office-details" id="office-details-content">
+            <!-- سيتم تعبئة محتوى المكتب ديناميكيًا -->
+        </div>
+    </div>
+
+    <script>
+        // بيانات المكاتب والأعضاء
+        const officesData = {
+            'publishing': {
+                id: 'publishing',
+                name: 'مكتب النشر العلمي',
+                icon: 'fas fa-book-open',
+                description: 'يقوم مكتب النشر العلمي بدور محوري في نشر الأبحاث والدراسات العلمية التي تنتجها المجموعة، وضمان جودة هذه المنشورات وفقًا للمعايير الأكاديمية الدولية. يعمل المكتب على تحرير المراجعات العلمية وإعداد الأوراق البحثية للنشر في المجلات المحكمة.',
+                tasks: [
+                    'مراجعة وتحرير الأوراق البحثية قبل النشر',
+                    'التنسيق مع المجلات العلمية المحكمة',
+                    'ضمان الامتثال للمعايير الأخلاقية للنشر',
+                    'تتبع عملية النشر وحالة المقبولية',
+                    'تنظيم ورش عمل حول الكتابة والنشر العلمي'
+                ],
+                members: [
+                    {
+                        name: 'ياسر عبد الرافع',
+                        role: 'مسؤول النشر العلمي',
+                        phone: '+249 91 252 4383',
+                        email: 'yasser@grg-research.org',
+                        telegram: '@yasser_editor',
+                        image: 'https://randomuser.me/api/portraits/men/32.jpg'
+                    },
+                    {
+                        name: 'عبدالحميد محمد علي',
+                        role: 'عضو',
+                        phone: '+249 91 964 4750',
+                        email: 'abdelhamid@grg-research.org',
+                        telegram: '@abdelhamid_ali',
+                        image: 'https://randomuser.me/api/portraits/men/45.jpg'
+                    },
+                    {
+                        name: 'مهند بشرى مساعد',
+                        role: 'عضو',
+                        phone: '+249 90 562 0666',
+                        email: 'mohanad@grg-research.org',
+                        telegram: '@mohanad_assist',
+                        image: 'https://randomuser.me/api/portraits/men/22.jpg'
+                    },
+                    {
+                        name: 'ماريا بدر الدين علي',
+                        role: 'عضو',
+                        phone: '+249 90 178 2900',
+                        email: 'maria@grg-research.org',
+                        telegram: '@maria_badr',
+                        image: 'https://randomuser.me/api/portraits/women/65.jpg'
+                    },
+                    {
+                        name: 'اسراء عبدالعظيم',
+                        role: 'عضو',
+                        phone: '+249 90 311 7881',
+                        email: 'esraa@grg-research.org',
+                        telegram: '@esraa_abdelazim',
+                        image: 'https://randomuser.me/api/portraits/women/33.jpg'
+                    }
+                ]
+            },
+            'membership': {
+                id: 'membership',
+                name: 'مكتب العضوية',
+                icon: 'fas fa-users',
+                description: 'يتولى مكتب العضوية إدارة عضوية الباحثين في المجموعة، ومتابعة المجموعات البحثية الفرعية، وضمان تنظيم العضوية وتحديث بيانات الأعضاء. يعمل المكتب على جذب الباحثين المتميزين وتسهيل انضمامهم للمجموعة.',
+                tasks: [
+                    'إدارة طلبات العضوية الجديدة',
+                    'متابعة بيانات الأعضاء وتحديثها',
+                    'تنسيق عمل المجموعات البحثية الفرعية',
+                    'تنظيم فعاليات تعريفية بالمجموعة',
+                    'إصدار شهادات العضوية والتجديدات'
+                ],
+                members: [
+                    {
+                        name: 'الطيب إبراهيم',
+                        role: 'مسؤول العضوية ومتابعة المجموعات البحثية',
+                        phone: '+249 90 167 6270',
+                        email: 'tayeb@grg-research.org',
+                        telegram: '@tayeb_ibrahim',
+                        image: 'https://randomuser.me/api/portraits/men/55.jpg'
+                    },
+                    {
+                        name: 'محمد الهادي',
+                        role: 'نائب مسؤول العضوية',
+                        phone: '+249 12 242 4846',
+                        email: 'mohamed_hadi@grg-research.org',
+                        telegram: '@mohamed_alhadi',
+                        image: 'https://randomuser.me/api/portraits/men/28.jpg'
+                    }
+                ]
+            },
+            'ethics': {
+                id: 'ethics',
+                name: 'مكتب أخلاقيات البحث',
+                icon: 'fas fa-balance-scale',
+                description: 'يهتم مكتب أخلاقيات البحث بضمان التزام جميع الأبحاث التي تجريها المجموعة بالمبادئ الأخلاقية والمعايير الدولية. يقوم المكتب بمراجعة المقترحات البحثية والتأكد من حماية حقوق المشاركين في الدراسات.',
+                tasks: [
+                    'مراجعة المقترحات البحثية من الناحية الأخلاقية',
+                    'ضمان حماية حقوق وخصوصية المشاركين في الأبحاث',
+                    'التأكد من الامتثال للمعايير الأخلاقية الدولية',
+                    'تقديم استشارات أخلاقية للباحثين',
+                    'تنظيم ورش عمل حول أخلاقيات البحث'
+                ],
+                members: [
+                    {
+                        name: 'هدى النابلسي',
+                        role: 'مسؤول أخلاقيات البحث',
+                        phone: '+962 7 7539 0770',
+                        email: 'huda@grg-research.org',
+                        telegram: '@huda_ethics',
+                        image: 'https://randomuser.me/api/portraits/women/44.jpg'
+                    },
+                    {
+                        name: 'الشفيع محمد جبريل',
+                        role: 'نائب مسؤول أخلاقيات البحث',
+                        phone: '+249 92 076 1697',
+                        email: 'alshafei@grg-research.org',
+                        telegram: '@alshafei_jibril',
+                        image: 'https://randomuser.me/api/portraits/men/37.jpg'
+                    }
+                ]
+            },
+            'training': {
+                id: 'training',
+                name: 'مكتب التدريب والتطوير',
+                icon: 'fas fa-chalkboard-teacher',
+                description: 'يعمل مكتب التدريب والتطوير على تطوير مهارات الباحثين في المجموعة من خلال تقديم برامج تدريبية متخصصة وورش عمل. يهدف المكتب إلى رفع الكفاءة العلمية والعملية للباحثين وتعزيز قدراتهم البحثية.',
+                tasks: [
+                    'تصميم وتنفيذ البرامج التدريبية للباحثين',
+                    'تنظيم ورش عمل حول المنهجيات البحثية',
+                    'تطوير مهارات الكتابة والنشر العلمي',
+                    'تنظيم ندوات ومحاضرات علمية',
+                    'متابعة التطور المهني للباحثين'
+                ],
+                members: [
+                    {
+                        name: 'بخيت أحمد أبكر',
+                        role: 'رئيس القسم',
+                        phone: '+249125346917',
+                        email: 'bakheet@grg-research.org',
+                        telegram: '@bakheet_ahmed',
+                        image: 'https://randomuser.me/api/portraits/men/50.jpg'
+                    },
+                    {
+                        name: 'سليمان سفيان سليمان',
+                        role: 'نائب رئيس القسم',
+                        phone: '+31 6 84900779',
+                        email: 'sulaiman@grg-research.org',
+                        telegram: '@sulaiman_sufian',
+                        image: 'https://randomuser.me/api/portraits/men/41.jpg'
+                    },
+                    {
+                        name: 'صهيب محمد مختار',
+                        role: 'منسق التدريب والتطوير',
+                        phone: '+249 96 176 2975',
+                        email: 'suhaib@grg-research.org',
+                        telegram: '@suhaib_mukhtar',
+                        image: 'https://randomuser.me/api/portraits/men/29.jpg'
+                    },
+                    {
+                        name: 'محمد صلاح عبد الرازق',
+                        role: 'نائب منسق التدريب',
+                        phone: '+249 12 168 9607',
+                        email: 'mohamed_salah@grg-research.org',
+                        telegram: '@mohamed_salah',
+                        image: 'https://randomuser.me/api/portraits/men/34.jpg'
+                    }
+                ]
+            },
+            'publishing2': {
+                id: 'publishing2',
+                name: 'مكتب النشر العلمي (2)',
+                icon: 'fas fa-newspaper',
+                description: 'يتميز مكتب النشر العلمي الثاني بتخصصه في نشر الأبحاث متعددة التخصصات والتعاون مع المؤسسات البحثية الدولية. يركز المكتب على تعزيز التعاون البحثي الدولي ونشر الأبحاث في مجلات مصنفة عالميًا.',
+                tasks: [
+                    'التعاون مع المجلات العلمية الدولية',
+                    'نشر الأبحاث متعددة التخصصات',
+                    'تسهيل التعاون البحثي الدولي',
+                    'ترجمة الأبحاث إلى الإنجليزية للنشر الدولي',
+                    'تنظيم مؤتمرات علمية دولية'
+                ],
+                members: [
+                    {
+                        name: 'بخيت أحمد أبكر',
+                        role: 'رئيس القسم',
+                        phone: '+249125346917',
+                        email: 'bakheet@grg-research.org',
+                        telegram: '@bakheet_ahmed',
+                        image: 'https://randomuser.me/api/portraits/men/50.jpg'
+                    },
+                    {
+                        name: 'سليمان سفيان سليمان',
+                        role: 'نائب رئيس القسم',
+                        phone: '+31 6 84900779',
+                        email: 'sulaiman@grg-research.org',
+                        telegram: '@sulaiman_sufian',
+                        image: 'https://randomuser.me/api/portraits/men/41.jpg'
+                    },
+                    {
+                        name: 'ياسر عبد الرافع',
+                        role: 'مسؤول النشر العلمي',
+                        phone: '+249 91 252 4383',
+                        email: 'yasser@grg-research.org',
+                        telegram: '@yasser_editor',
+                        image: 'https://randomuser.me/api/portraits/men/32.jpg'
+                    }
+                ]
+            },
+            'research-projects': {
+                id: 'research-projects',
+                name: 'مكتب المشاريع البحثية',
+                icon: 'fas fa-project-diagram',
+                description: 'يتولى مكتب المشاريع البحثية إدارة وتنسيق المشاريع البحثية التي تنفذها المجموعة. يعمل المكتب على تخطيط المشاريع وتوزيع المهام ومراقبة التقدم وضمان تحقيق الأهداف البحثية ضمن الجدول الزمني المحدد.',
+                tasks: [
+                    'تخطيط وتصميم المشاريع البحثية',
+                    'توزيع المهام والمسؤوليات على الفرق البحثية',
+                    'متابعة تقدم المشاريع البحثية',
+                    'تنسيق التعاون بين الفرق البحثية',
+                    'إعداد تقارير تقدم المشاريع'
+                ],
+                members: [
+                    {
+                        name: 'يوسف عبد الرحمن يوسف فضل المولى',
+                        role: 'منسق المشاريع البحثية',
+                        phone: '+249904203912',
+                        email: 'yousif@grg-research.org',
+                        telegram: '@yousif_abdulrahman',
+                        image: 'https://randomuser.me/api/portraits/men/56.jpg'
+                    },
+                    {
+                        name: 'ريهام عماد بشير عبدالله',
+                        role: 'نائب منسق المشاريع البحثية',
+                        phone: '+20 12 83572377',
+                        email: 'reham@grg-research.org',
+                        telegram: '@reham_emad',
+                        image: 'https://randomuser.me/api/portraits/women/42.jpg'
+                    },
+                    {
+                        name: 'ريان ناصر محمد المغيرة',
+                        role: 'عضو',
+                        phone: '+249 12 528 9801',
+                        email: 'rayan_nasser@grg-research.org',
+                        telegram: '@rayan_nasser',
+                        image: 'https://randomuser.me/api/portraits/men/25.jpg'
+                    },
+                    {
+                        name: 'ريان يوسف محمد عبدالله',
+                        role: 'عضو',
+                        phone: '+249 11 210 8761',
+                        email: 'rayan_yousif@grg-research.org',
+                        telegram: '@rayan_yousif',
+                        image: 'https://randomuser.me/api/portraits/men/23.jpg'
+                    },
+                    {
+                        name: 'محمد صديق بشير عثمان',
+                        role: 'عضو',
+                        phone: '+249 96 679 6572',
+                        email: 'mohamed_siddiq@grg-research.org',
+                        telegram: '@mohamed_siddiq',
+                        image: 'https://randomuser.me/api/portraits/men/48.jpg'
+                    }
+                ]
+            }
+        };
+
+        // ترتيب المكاتب كما هو مطلوب
+        const officeOrder = ['publishing', 'membership', 'ethics', 'training', 'publishing2', 'research-projects'];
+
+        // متغيرات DOM
+        let splashScreen, homePage, officeDetailsPage;
+        let officesContainer, searchInput, officeDetailsContent;
+
+        // تهيئة التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعريف عناصر DOM
+            splashScreen = document.getElementById('splash-screen');
+            homePage = document.getElementById('home-page');
+            officeDetailsPage = document.getElementById('office-details-page');
+            officesContainer = document.getElementById('offices-container');
+            searchInput = document.getElementById('search-input');
+            officeDetailsContent = document.getElementById('office-details-content');
+            
+            // إنشاء دوائر المكاتب
+            createOfficeCircles();
+            
+            // الانتقال التلقائي من شاشة البدء بعد 4 ثوان
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.classList.add('hidden');
+                    homePage.classList.remove('hidden');
+                }, 800);
+            }, 4000);
+            
+            // إضافة مستمع حدث للبحث
+            searchInput.addEventListener('input', filterOffices);
+        });
+
+        // وظيفة إنشاء دوائر المكاتب
+        function createOfficeCircles() {
+            officesContainer.innerHTML = '';
+            
+            officeOrder.forEach((officeId, index) => {
+                const office = officesData[officeId];
+                const officeElement = document.createElement('div');
+                officeElement.className = 'office-circle';
+                officeElement.dataset.id = officeId;
+                officeElement.innerHTML = `
+                    <div class="office-icon">
+                        <i class="${office.icon}"></i>
+                    </div>
+                    <h3 class="office-name">${office.name}</h3>
+                    <div class="office-number">${index + 1}</div>
+                `;
+                
+                officeElement.addEventListener('click', () => showOfficeDetails(officeId));
+                officesContainer.appendChild(officeElement);
+            });
+        }
+
+        // وظيفة عرض تفاصيل المكتب
+        function showOfficeDetails(officeId) {
+            const office = officesData[officeId];
+            
+            // إخفاء الصفحة الرئيسية وإظهار صفحة التفاصيل
+            homePage.classList.add('hidden');
+            officeDetailsPage.classList.remove('hidden');
+            
+            // بناء محتوى صفحة التفاصيل
+            let membersHTML = '';
+            office.members.forEach(member => {
+                membersHTML += `
+                    <div class="member-card">
+                        <div class="member-image" style="background-image: url('${member.image}');"></div>
+                        <div class="member-info">
+                            <h3 class="member-name">${member.name}</h3>
+                            <p class="member-role">${member.role}</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone contact-icon"></i>
+                                    <span>${member.phone}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope contact-icon"></i>
+                                    <span>${member.email}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fab fa-telegram contact-icon"></i>
+                                    <span>${member.telegram}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            let tasksHTML = '';
+            office.tasks.forEach(task => {
+                tasksHTML += `<li>${task}</li>`;
+            });
+            
+            officeDetailsContent.innerHTML = `
+                <button class="back-button" onclick="goBackToHome()">
+                    <i class="fas fa-arrow-right"></i>
+                    العودة إلى المكاتب
+                </button>
+                
+                <div class="office-header">
+                    <h2 class="office-title">${office.name}</h2>
+                    <button class="print-button" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        طباعة التفاصيل
+                    </button>
+                </div>
+                
+                <p class="office-description">${office.description}</p>
+                
+                <h3 class="section-title">أعضاء المكتب</h3>
+                <div class="members-grid">
+                    ${membersHTML}
+                </div>
+                
+                <h3 class="section-title">المهام الأساسية</h3>
+                <div class="tasks-list">
+                    <ul>${tasksHTML}</ul>
+                </div>
+            `;
+            
+            // التمرير إلى أعلى الصفحة
+            window.scrollTo(0, 0);
+        }
+
+        // وظيفة العودة إلى الصفحة الرئيسية
+        function goBackToHome() {
+            officeDetailsPage.classList.add('hidden');
+            homePage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // وظيفة تصفية المكاتب حسب البحث
+        function filterOffices() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const officeCircles = document.querySelectorAll('.office-circle');
+            
+            officeCircles.forEach(circle => {
+                const officeId = circle.dataset.id;
+                const office = officesData[officeId];
+                const officeName = office.name.toLowerCase();
+                
+                if (officeName.includes(searchTerm)) {
+                    circle.style.display = 'flex';
+                } else {
+                    circle.style.display = 'none';
+                }
+            });
+        }
+
+        // جعل الدوال متاحة عالمياً للاستدعاء من HTML
+        window.showOfficeDetails = showOfficeDetails;
+        window.goBackToHome = goBackToHome;
+    </script>
+</body>
+</html>
